@@ -2,6 +2,7 @@
 
 class Users
 {
+
     private $conn;
     private $table = "users";
 
@@ -37,6 +38,19 @@ class Users
         }
 
         return false;
+    }
+    public function getAllUsers()
+    {
+        $sql = "SELECT * FROM $this->table";
+        $result = $this->conn->query($sql);
+
+        if ($result ->num_rows > 0) {
+            return $result;
+        } else {
+            return false;
+        }
+
+        return [];
     }
 }
 ?>
