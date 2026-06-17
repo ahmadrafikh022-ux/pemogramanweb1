@@ -3,9 +3,11 @@ session_start();
 
 
 if(!isset($_SESSION['is_logged_in'])) {
-  header("Location: ../index.php");
+  header("Location: ../index.html");
   exit;
 }
+
+$halaman = $_GET['halaman'] ?? 'daftar_users.php';
 ?>
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
@@ -19,9 +21,12 @@ if(!isset($_SESSION['is_logged_in'])) {
     />
     <meta name="generator" content="Astro v5.13.2" />
     <title>Dashboard Template · Bootstrap v5.3</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link
+      rel="canonical"
+      href="https://getbootstrap.com/docs/5.3/examples/dashboard/"
+    />
     <script src="../assets/js/color-modes.js"></script>
-    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <meta name="theme-color" content="#712cf9" />
     <link href="dashboard.css" rel="stylesheet" />
     <style>
@@ -372,12 +377,8 @@ if(!isset($_SESSION['is_logged_in'])) {
                     Dashboard
                   </a>
                 </li>
-                
-                
-                
-                
                 <li class="nav-item">
-                  <a class="nav-link d-flex align-items-center gap-2" href="#">
+                  <a class="nav-link d-flex align-items-center gap-2" href="index.php">
                     <svg class="bi" aria-hidden="true">
                       <use xlink:href="#puzzle"></use>
                     </svg>
@@ -390,7 +391,7 @@ if(!isset($_SESSION['is_logged_in'])) {
               <hr class="my-3" />
               <ul class="nav flex-column mb-auto">
                 <li class="nav-item">
-                  <a class="nav-link d-flex align-items-center gap-2" href="#"> 
+                  <a class="nav-link d-flex align-items-center gap-2" href="#">
                     <svg class="bi" aria-hidden="true">
                       <use xlink:href="#gear-wide-connected"></use>
                     </svg>
@@ -398,8 +399,7 @@ if(!isset($_SESSION['is_logged_in'])) {
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link d-flex align-items-center gap-2" href="../logout.php">
-                    <svg class="bi" aria-hidden="true">
+                  <a class="nav-link d-flex align-items-center gap-2" href="../logout.php">                <svg class="bi" aria-hidden="true">
                       <use xlink:href="#door-closed"></use>
                     </svg>
                     Sign out
@@ -409,9 +409,8 @@ if(!isset($_SESSION['is_logged_in'])) {
             </div>
           </div>
         </div>
-        <?php
-          include 'daftar_user.php';
-          ?>
+       <?php
+        include $halaman; ?>
       </div>
     </div>
     <script
