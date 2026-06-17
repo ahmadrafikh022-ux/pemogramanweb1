@@ -35,7 +35,7 @@ session_start();
                 <button class="btn btn-success" type="submit">Submit</button>
                 <button class="btn btn-danger" type="reset">Reset</button>
                 <div class="mt-5 text-center">
-                    <a href="Sign_Up.html">Sign Up</a>
+                    <a href="SignfFrom.html">Sign Up</a>
                 </div>
             </form>
         </div>

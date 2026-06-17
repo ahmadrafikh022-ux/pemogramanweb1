@@ -8,7 +8,7 @@ $username = $_POST['input_username'] ?? '';
 $password = $_POST['input_password'] ?? '';
 
 $db = new Database();
-$conn = $db->connect(); // Sekarang ini tidak akan error lagi
+$conn = $db->connect(); 
 
 $user = new Users($conn);
 

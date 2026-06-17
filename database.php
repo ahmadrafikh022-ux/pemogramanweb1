@@ -10,7 +10,7 @@ class Database
 
     public function connect()
     {
-        $this->conn = new mysqi(
+        $this->conn = new mysqli(
             $this->host,
             $this->username,
             $this->password,
