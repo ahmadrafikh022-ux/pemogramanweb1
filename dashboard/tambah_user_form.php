@@ -4,7 +4,7 @@ include '../database.php';
 
 $db = new Database();
 $conn = $db->connect();
-$users = new Users($conn);
+$users = new User($conn);
 
 $result = $users->getAllUsers();
 $daftar_user = $result->fetch_all(MYSQLI_ASSOC);

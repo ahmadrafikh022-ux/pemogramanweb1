@@ -1,62 +1,70 @@
 <?php
-
-class Users
+class User
 {
-
     private $conn;
     private $table = "users";
 
-    public function __construct($conn)
+    public function __construct($db)
     {
-        $this->conn = $conn;
+        $this->conn = $db;
     }
 
-    // REGISTER
+    // CREATE
     public function create($username, $email, $asal, $password)
     {
-        $sql = "INSERT INTO $this->table (username, email, asal, password)
+        $sql = "INSERT INTO $this->table (username, email, asal, password) 
                 VALUES ('$username', '$email', '$asal', '$password')";
 
         if ($this->conn->query($sql)) {
-            return true;
+            echo "Data berhasil ditambahkan <br>";
         } else {
-            return false;
+            echo "Error: " . $this->conn->error;
         }
     }
 
-    // LOGIN
-    public function login($username, $password)
+    public function login($username, $password){
+    $sql = "SELECT * FROM " . $this->table . " WHERE username = '" .
+            $username . "' AND password = '" .
+            $password . "'";
+
+    $result = $this->conn->query($sql);
+
+    if(!$result->num_rows > 0){
+     return false;
+    }
+    return true;
+    }
+public function getAllUsers()
     {
-        $sql = "SELECT * FROM $this->table
-                WHERE username = '$username'
-                AND password = '$password'";
+    $sql = "SELECT * FROM $this->table";
+    $result = $this->conn->query($sql);
 
-        $result = $this->conn->query($sql);
+    if ($result->num_rows > 0) {
+        return $result;
+    } else {
+        return null;
 
-        if ($result && $result->num_rows > 0) {
-            return true;
-        }
-
-        return false;
     }
-    public function getAllUsers()
-    {
-        $sql = "SELECT * FROM $this->table";
-        $result = $this->conn->query($sql);
+ }
 
-        if ($result ->num_rows > 0) {
-            return $result;
-        } else {
-            return false;
-        }
-
-        return [];
-    }
-
-    public function hapus ($id){
+    public function hapus($id){
         $sql = "DELETE FROM $this->table WHERE id = " . $id;
         $result = $this->conn->query($sql);
+
         return $result;
     }
+    public function getUserById($id){
+        $sql = "SELECT * FROM $this->table WHERE id = " . $id;
+        $result = $this->conn->query($sql);
+            return $result->fetch_assoc();
+        
+        
+    }
 
+    public function update($id, $username, $email, $asal, $password){
+    $sql = "UPDATE $this->table SET username='$username', email='$email', asal='$asal', password='$password' WHERE id = " . $id;
+    $result = $this->conn->query($sql);
+
+    return $result;
+}
 }

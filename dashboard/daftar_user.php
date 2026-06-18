@@ -4,19 +4,13 @@ include '../database.php';
 
 $db = new Database();
 $conn = $db->connect();
-$users = new Users($conn);
+$users = new User($conn);
 
 $result = $users->getAllUsers();
-$daftar_users = [];
-
-if ($result && $result->num_rows > 0) {
-    $daftar_users = $result->fetch_all(MYSQLI_ASSOC);
-}
+$daftar_user = $result->fetch_all(MYSQLI_ASSOC);
 ?>
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-  
 <h2>Daftar User</h2>
-
 <a href="index.php?halaman=tambah_user_form" class="btn btn-primary mb-3">Tambah User</a>
 
           <div class="table-responsive small">
@@ -32,7 +26,7 @@ if ($result && $result->num_rows > 0) {
               </thead>
               <tbody>
               <?php 
-              foreach ($daftar_users as $user) {
+              foreach ($daftar_user as $user) {
                 ?>
                 <tr>
                   <td><?= $user['id'] ?></td>
@@ -41,7 +35,7 @@ if ($result && $result->num_rows > 0) {
                   <td><?= $user['asal'] ?></td>
                   <td>
                    <a href="delete_users.php?id=<?= $user['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus pengguna ini?')">Delete</a>
-                   <a href="edit_users.php?id=<?= $user['id'] ?>" class="btn btn-warning btn-sm">Edit</a>
+                   <a href="index.php?halaman=edit_user_form&id=<?= $user['id'] ?>"  class="btn btn-success btn-sm <?= (isset($_GET['id']) && $user['id'] == $_GET['id']) ? 'disabled' : '' ?>">Edit</a>
               </td>
               </tr>
                  <?php

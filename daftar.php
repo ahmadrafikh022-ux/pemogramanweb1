@@ -20,11 +20,8 @@ if (isset($_POST["saya_setuju"])) {
     echo "Database terhubung <br>";
 
     $user = new Users($conn);
-
     $user->create($username, $email, $asal, $password);
-
 } else {
-
     echo "Anda harus menyetujui form";
 
 }

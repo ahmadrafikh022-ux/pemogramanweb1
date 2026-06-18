@@ -7,7 +7,7 @@ if(!isset($_SESSION['is_logged_in'])) {
   exit;
 }
 
-$halaman = $_GET['halaman'] ?? 'daftar_user.php';
+$halaman = $_GET['halaman'] ?? 'daftar_user';
 ?>
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
@@ -410,7 +410,7 @@ $halaman = $_GET['halaman'] ?? 'daftar_user.php';
           </div>
         </div>
        <?php
-        include $halaman; 
+        include $halaman . ".php"; 
         ?>
       </div>
     </div>
