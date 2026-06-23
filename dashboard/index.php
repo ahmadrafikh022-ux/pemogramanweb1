@@ -409,11 +409,27 @@ $halaman = $_GET['halaman'] ?? 'daftar_user';
             </div>
           </div>
         </div>
-       <?php
-        include $halaman . ".php"; 
-        ?>
-      </div>
-    </div>
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+
+        <?php if (isset($_SESSION['username'])): ?>
+            <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                Selamat Datang, <strong><?= htmlspecialchars($_SESSION['username']); ?></strong>!
+                <?php if (isset($_SESSION['login_count'])): ?>
+                    Anda telah login sebanyak <strong><?= $_SESSION['login_count']; ?></strong> kali.
+                <?php else: ?>
+                    Anda telah login.
+                <?php endif; ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php endif; ?>
+
+        <div class="mt-4">
+            <?php include $halaman . ".php"; ?>
+        </div>
+    </main>
+
+</div> </div>
+       
     <script
       src="../assets/dist/js/bootstrap.bundle.min.js"
       class="astro-vvvwv3sm"
